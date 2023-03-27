@@ -16,6 +16,13 @@ jobs:
 
     - name: Build project with Maven
       run: mvn -B clean install --file pom.xml
+    - name: Package with maven
+      run: mvn package
+    - run: mkdir artifact && cp target/*.jar artifact
+    - uses: actions/upload-artifact@v2
+      with:
+       name: Package
+       path: artifact  
     - name: Login to DockerHub Repo
       uses: docker/login-action@v2
       with:
